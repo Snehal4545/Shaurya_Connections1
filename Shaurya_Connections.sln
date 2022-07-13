@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shaurya_Connections", "Shaurya_Connections\Shaurya_Connections.csproj", "{6341CC55-053E-46DC-A7A6-1EC6D48351AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6341CC55-053E-46DC-A7A6-1EC6D48351AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6341CC55-053E-46DC-A7A6-1EC6D48351AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6341CC55-053E-46DC-A7A6-1EC6D48351AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6341CC55-053E-46DC-A7A6-1EC6D48351AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA8C3BFA-487F-4231-8F89-3BBAECCE3CE7}
+	EndGlobalSection
+EndGlobal
