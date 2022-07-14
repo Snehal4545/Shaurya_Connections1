@@ -13,48 +13,46 @@ using System.Configuration;
 
 namespace Shaurya_Connections
 {
-    public partial class Form2 : Form
+    public partial class Form3 : Form
     {
         SqlConnection con;
         SqlDataAdapter da;
         SqlCommandBuilder scb;
         DataSet ds;
-
-        public Form2()
+        public Form3()
         {
             InitializeComponent();
             con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString);
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void Form3_Load(object sender, EventArgs e)
         {
 
         }
-        public DataSet GetAllEmps()
+        public DataSet GetAllStud()
         {
-            da = new SqlDataAdapter("select * from Employee", con);
-           
+            da = new SqlDataAdapter("select * from Students", con);
+
             da.MissingSchemaAction = MissingSchemaAction.AddWithKey; // assign PK to the col which in the DataSet
             scb = new SqlCommandBuilder(da);
             ds = new DataSet();
             // emp is a table name given which is in the DataSet
-            da.Fill(ds, "emp");// Fill method fire the select qry
+            da.Fill(ds, "Stud");// Fill method fire the select qry
             return ds;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             try
             {
-                ds = GetAllEmps();
-                DataRow row = ds.Tables["emp"].NewRow();
+                ds = GetAllStud();
+                DataRow row = ds.Tables["Stud"].NewRow();
                 row["Name"] = txtName.Text;
-                row["Salary"] = txtSalary.Text;
-               
-                ds.Tables["emp"].Rows.Add(row);// attach the new row to the ds
-                
-                int result = da.Update(ds.Tables["emp"]);//update() will reflect the changes to the DB
+                row["Percentage"] = txtPercentage.Text;
+
+                ds.Tables["Stud"].Rows.Add(row);// attach the new row to the ds
+
+                int result = da.Update(ds.Tables["Stud"]);//update() will reflect the changes to the DB
                 if (result == 1)
                 {
                     MessageBox.Show("Success ! Recored inserted");
@@ -68,17 +66,18 @@ namespace Shaurya_Connections
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+
             try
             {
-                ds = GetAllEmps();
-                DataRow row = ds.Tables["emp"].Rows.Find(txtId.Text);//use method row.find to find which row wnts to update
+                ds = GetAllStud();
+                DataRow row = ds.Tables["Stud"].Rows.Find(txtId.Text);//use method row.find to find which row wnts to update
                 if (row != null)
                 {
                     row["Name"] = txtName.Text;
-                    row["Salary"] = txtSalary.Text;
-                    
-                   
-                    int result = da.Update(ds.Tables["emp"]); //update() will reflect the changes to the DB
+                    row["Percentage"] = txtPercentage.Text;
+
+
+                    int result = da.Update(ds.Tables["Stud"]); //update() will reflect the changes to the DB
                     if (result == 1)
                     {
                         MessageBox.Show("Success ! Recored Updated");
@@ -95,18 +94,18 @@ namespace Shaurya_Connections
         {
             try
             {
-                ds = GetAllEmps();
-                DataRow row = ds.Tables["emp"].Rows.Find(txtId.Text);
+                ds = GetAllStud();
+                DataRow row = ds.Tables["Stud"].Rows.Find(txtId.Text);
                 if (row != null)
                 {
                     row.Delete();//delete row
-                    int result = da.Update(ds.Tables["emp"]);
+                    int result = da.Update(ds.Tables["Stud"]);
                     if (result == 1)
                     {
                         MessageBox.Show("Success ! Recored Deleted");
                         txtId.Clear();
                         txtName.Clear();
-                        txtSalary.Clear();
+                        txtPercentage.Clear();
                     }
                 }
             }
@@ -116,17 +115,25 @@ namespace Shaurya_Connections
             }
         }
 
-        private void btnSearchAll_Click(object sender, EventArgs e)
+        private void btnShowAll_Click(object sender, EventArgs e)
         {
+            ds = GetAllStud();
+            StudGridView.DataSource = ds.Tables["Stud"];
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
             try
             {
-                ds = GetAllEmps();
-                DataRow row = ds.Tables["emp"].Rows.Find(txtId.Text);
+                ds = GetAllStud();
+                DataRow row = ds.Tables["Stud"].Rows.Find(txtId.Text);
                 if (row != null)
                 {
 
                     txtName.Text = row["Name"].ToString();
-                    txtSalary.Text = row["Salary"].ToString();
+                    txtPercentage.Text = row["Percentage"].ToString();
 
                 }
                 else
@@ -138,18 +145,7 @@ namespace Shaurya_Connections
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void btnShowAll_Click(object sender, EventArgs e)
-        {
-            ds = GetAllEmps();
-            EmpGridView.DataSource = ds.Tables["emp"];
-
-
-
-
 
         }
     }
 }
-
